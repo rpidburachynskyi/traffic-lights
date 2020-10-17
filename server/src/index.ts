@@ -1,4 +1,3 @@
-import './socket/socket';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
@@ -6,6 +5,7 @@ dotenv.config();
 import * as express from 'express';
 import * as http from 'http';
 import { connect as connectSocketIoServer } from './socket.io/socket.io';
+import './socket/socket';
 
 const app = express();
 const server = http.createServer(app);

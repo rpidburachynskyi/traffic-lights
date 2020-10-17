@@ -6,7 +6,7 @@ server.on('connection', (socket) => {
 	console.log('Socket did connect');
 });
 
-server.listen(process.env.SOCKET_PORT, function () {
+server.listen(process.env.SOCKET_PORT, () => {
 	console.log(
 		`Socket server listening to ${process.env.SOCKET_PORT} port...`
 	);
