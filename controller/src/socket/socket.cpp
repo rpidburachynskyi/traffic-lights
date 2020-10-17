@@ -1,4 +1,5 @@
 #include "socket.h"
+#include "../lib/JSON/JSON.h"
 
 Socket::Socket()
 {
@@ -19,7 +20,6 @@ void Socket::loop()
 {
     if (this->_client->available())
     {
-
         std::string data = this->_client->readString().c_str();
 
         Serial.println(data.c_str());
