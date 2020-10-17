@@ -7,9 +7,10 @@ import { clamp, setTime, unclamp } from '../../services/socket/actions';
 
 interface Props {
 	light: interfaces.ILight;
+	canClamp: boolean;
 }
 
-const LightListItem = ({ light }: Props) => {
+const LightListItem = ({ light, canClamp }: Props) => {
 	const onChangeTime = (momentDate: moment.Moment | null) => {
 		if (!momentDate) throw new Error('Unknown date');
 		const time = momentDate.minutes() * 60 + momentDate.seconds();
@@ -29,14 +30,16 @@ const LightListItem = ({ light }: Props) => {
 				)}
 				onChange={onChangeTime}
 			/>
-			<Button
-				type={light.clamped ? 'primary' : 'default'}
-				onClick={() =>
-					light.clamped ? unclamp(light.id) : clamp(light.id)
-				}
-			>
-				{light.clamped ? 'Unclamp' : 'Clamp'}
-			</Button>
+			{light.clamped && (
+				<Button type='primary' onClick={() => unclamp(light.id)}>
+					Unclamp
+				</Button>
+			)}
+			{!light.clamped && (
+				<Button disabled={!canClamp} onClick={() => clamp(light.id)}>
+					Clamp
+				</Button>
+			)}
 		</List.Item>
 	);
 };
