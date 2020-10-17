@@ -1,9 +1,22 @@
+import { types } from 'shared';
 import io from 'socket.io-client';
+import { setGlobalInfo } from '../../App';
+import { connectActions } from './actions';
 
 const socket = io('http://localhost:5000');
 
 socket.on('connect', () => {
-	console.log('A');
+	socket.on('init', onInit);
+	socket.on('update', onUpdate);
 });
 
-console.log(socket);
+const onInit = ({ info }: { info: types.Info }) => {
+	setGlobalInfo(info);
+};
+
+const onUpdate = ({ info }: { info: types.Info }) => {
+	setGlobalInfo(info);
+	console.log(info);
+};
+
+connectActions(socket);
