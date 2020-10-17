@@ -5,10 +5,9 @@ import Header from './components/Header';
 import LightsList from './components/LightsList';
 import { types } from 'shared';
 import './services/socket';
+import { turn } from './services/socket/actions';
 
 function App() {
-	const [isTurned, setIsTurned] = useState(false);
-
 	const [info, setInfo] = useState<types.Info | null>(null);
 
 	useEffect(() => {
@@ -19,7 +18,7 @@ function App() {
 		<Layout className='App'>
 			{info && (
 				<>
-					<Header isTurned={isTurned} onTurn={setIsTurned} />
+					<Header isTurned={info.isTurned} onTurn={turn} />
 					<Layout.Content>
 						<LightsList lights={info.lights} />
 					</Layout.Content>
