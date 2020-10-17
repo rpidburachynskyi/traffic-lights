@@ -16,7 +16,6 @@ const onInit = ({ info }: { info: types.Info }) => {
 
 const onUpdate = ({ info }: { info: types.Info }) => {
 	setGlobalInfo(info);
-	console.log(info);
 };
 
 connectActions(socket);
