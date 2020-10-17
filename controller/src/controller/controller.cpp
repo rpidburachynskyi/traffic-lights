@@ -2,10 +2,11 @@
 
 #include <Arduino.h>
 
-Controller::Controller(Counter *counter, TrafficLights *trafficLights)
+Controller::Controller(Counter *counter, TrafficLights *trafficLights, Socket *socket)
 {
     this->_counter = counter;
     this->_trafficLights = trafficLights;
+    this->_socket = socket;
 
     this->_counter->from(14);
 }
