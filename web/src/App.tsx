@@ -4,6 +4,7 @@ import './App.css';
 import Header from './components/Header';
 import LightsList from './components/LightsList';
 import { ILight } from './interfaces/ILight';
+import './services/socket';
 
 function App() {
 	const [isTurned, setIsTurned] = useState(false);
