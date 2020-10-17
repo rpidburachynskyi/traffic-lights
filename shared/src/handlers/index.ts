@@ -1,0 +1,1 @@
+export { setTimeHandler } from './setTimeHandler';
