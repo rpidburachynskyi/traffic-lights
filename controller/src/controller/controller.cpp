@@ -1,0 +1,27 @@
+#include "controller.h"
+
+#include <Arduino.h>
+
+Controller::Controller(Counter *counter, TrafficLights *trafficLights)
+{
+    this->_counter = counter;
+    this->_trafficLights = trafficLights;
+
+    this->_counter->from(14);
+}
+
+Controller::~Controller()
+{
+    delete this->_counter;
+    delete this->_trafficLights;
+}
+
+void Controller::loop()
+{
+    this->_counter->loop();
+
+    if (this->_counter->remains() < 0)
+    {
+        this->_counter->from(10);
+    }
+}

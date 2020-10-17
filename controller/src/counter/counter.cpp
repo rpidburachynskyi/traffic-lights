@@ -1,8 +1,11 @@
 #include "counter.h"
 
 #include <Arduino.h>
+#include <sstream>
 
-Counter::Counter(const int &CLK, const int &DIO)
+std::string NumberToString(const int &n);
+
+Counter::Counter(const int &CLK, const int &DIO) : _lastMillis(0), _fromSeconds(0)
 {
     _display = new TM1637Display(CLK, DIO);
 }
@@ -12,9 +15,42 @@ Counter::~Counter()
     delete _display;
 }
 
+void Counter::from(const int &seconds)
+{
+    _fromSeconds = seconds;
+    _lastMillis = millis();
+}
+
+int Counter::remains()
+{
+    int subMillis = millis() - _lastMillis;
+
+    int remainSeconds = subMillis / 1000;
+
+    return (_fromSeconds - remainSeconds);
+}
+
 void Counter::loop()
 {
-    this->show("1234");
+    int remainSeconds = remains();
+
+    if (remainSeconds < 0)
+        return;
+
+    int minutes = remainSeconds / 60;
+    int seconds = remainSeconds % 60;
+
+    std::string res = "";
+    if (minutes < 10)
+        res += "0";
+
+    res += NumberToString(minutes);
+
+    if (seconds < 10)
+        res += "0";
+    res += NumberToString(seconds);
+
+    this->show(res);
 }
 
 void Counter::show(std::string s)
@@ -70,6 +106,11 @@ void Counter::show(std::string s)
     }
 
     this->_display->setSegments(data);
+}
 
-    delay(1000);
+std::string NumberToString(const int &n)
+{
+    std::ostringstream ss;
+    ss << n;
+    return ss.str();
 }
