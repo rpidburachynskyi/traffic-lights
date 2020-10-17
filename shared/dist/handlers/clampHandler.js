@@ -12,7 +12,7 @@ var __assign = (this && this.__assign) || function () {
 };
 exports.__esModule = true;
 exports.clampHandler = void 0;
-exports.clampHandler = function (info, lightId, time) { return (__assign(__assign({}, info), { lights: info.lights.map(function (light) {
+exports.clampHandler = function (info, lightId) { return (__assign(__assign({}, info), { lights: info.lights.map(function (light) {
         if (light.id === lightId) {
             light.clamped = true;
         }
