@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "start:dev": "nodemon --watch ['src/**/*.ts'] --exec \"npm run build\""
+    "start:dev": "nodemon -e ts --watch \"src\" --exec \"npm run build\""
   },
   "keywords": [],
   "author": "",
