@@ -11,7 +11,7 @@ function App() {
 	const [info, setInfo] = useState<types.Info | null>(null);
 
 	useEffect(() => {
-		setGlobalInfo = setInfo;
+		setGlobalInfo = setInfo as typeof setGlobalInfo;
 	}, []);
 
 	return (
@@ -28,6 +28,8 @@ function App() {
 	);
 }
 
-export let setGlobalInfo: (info: types.Info) => void;
+export let setGlobalInfo: (
+	info: types.Info | ((prevState: types.Info) => types.Info)
+) => void;
 
 export default App;
