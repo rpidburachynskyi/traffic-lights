@@ -40,7 +40,6 @@ void setup()
   }
 
   Serial.println("Wifi has been connected");
-
   socket.begin(IPAddress(192, 168, 0, 100), 9000);
 }
 

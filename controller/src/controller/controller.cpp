@@ -20,6 +20,7 @@ Controller::~Controller()
 void Controller::loop()
 {
     this->_counter->loop();
+    this->_socket->loop();
 
     if (this->_counter->remains() < 0)
     {

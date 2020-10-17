@@ -17,10 +17,13 @@ void Socket::begin(const IPAddress &ip, const int &port)
 
 void Socket::loop()
 {
-    std::string data = this->_client->readString().c_str();
+    if (this->_client->available())
+    {
 
-    if (data.length() != 0)
+        std::string data = this->_client->readString().c_str();
+
         Serial.println(data.c_str());
+    }
 }
 
 bool Socket::hasUpdate()
