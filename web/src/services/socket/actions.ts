@@ -15,3 +15,13 @@ export const setTime = (lightId: string, time: number) => {
 	_socket.emit('setTime', lightId, time);
 	setGlobalInfo((info) => handlers.setTimeHandler(info, lightId, time));
 };
+
+export const clamp = (lightId: string) => {
+	_socket.emit('clamp', lightId);
+	setGlobalInfo((info) => handlers.clampHandler(info, lightId));
+};
+
+export const unclamp = (lightId: string) => {
+	_socket.emit('unclamp', lightId);
+	setGlobalInfo((info) => handlers.unclampHandler(info, lightId));
+};

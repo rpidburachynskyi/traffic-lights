@@ -3,7 +3,7 @@ import React from 'react';
 import { interfaces } from 'shared';
 import classes from './LightListItem.module.scss';
 import moment from 'moment';
-import { setTime } from '../../services/socket/actions';
+import { clamp, setTime, unclamp } from '../../services/socket/actions';
 
 interface Props {
 	light: interfaces.ILight;
@@ -29,8 +29,13 @@ const LightListItem = ({ light }: Props) => {
 				)}
 				onChange={onChangeTime}
 			/>
-			<Button loading={true}>
-				{light.clamped ? 'Clamped' : 'Clamp'}
+			<Button
+				type={light.clamped ? 'primary' : 'default'}
+				onClick={() =>
+					light.clamped ? unclamp(light.id) : clamp(light.id)
+				}
+			>
+				{light.clamped ? 'Unclamp' : 'Clamp'}
 			</Button>
 		</List.Item>
 	);
