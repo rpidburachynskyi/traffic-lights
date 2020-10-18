@@ -23,7 +23,7 @@ const onConnect = (socket: socketIo.Socket) => {
 	connectActions(socket);
 };
 
-export const updateAll = () => {
+export const updateSockets = () => {
 	sockets.forEach((socket) => {
 		const info = getInfo();
 

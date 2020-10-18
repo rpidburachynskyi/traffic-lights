@@ -1,0 +1,1 @@
+export { updateAll } from './updateAll';
