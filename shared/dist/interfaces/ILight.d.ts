@@ -3,4 +3,6 @@ export interface ILight {
     color: string;
     clamped: boolean;
     duration: number;
+    spec: boolean;
+    linksWithId: string;
 }
