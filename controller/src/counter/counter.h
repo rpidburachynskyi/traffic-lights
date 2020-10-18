@@ -13,11 +13,10 @@ public:
 
     void from(const int &seconds);
     int remains();
+    void show(std::string s);
 
 private:
     TM1637Display *_display;
-
-    void show(std::string s);
 
     int _lastMillis;
     int _fromSeconds;

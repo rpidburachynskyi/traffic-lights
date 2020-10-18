@@ -21,11 +21,7 @@ const int RECV_PIN = 21;
 
 const int SWITCH_CONTROL_BUTTON_PIN = 2;
 
-Counter counter(CLK, DIO);
-TrafficLights trafficLights(RED_PIN, YELLOW_PIN, GREEN_PIN, LEFT_GREEN_PIN, RIGHT_GREEN_PIN);
-Socket socket;
-
-Controller controller(&counter, &trafficLights, &socket, RECV_PIN, SWITCH_CONTROL_BUTTON_PIN);
+Controller *controller;
 
 void setup()
 {
@@ -44,10 +40,11 @@ void setup()
   }
 
   Serial.println("Wifi has been connected");
-  socket.begin(IPAddress(192, 168, 0, 104), 9000);
+
+  controller = new Controller(CLK, DIO, RED_PIN, YELLOW_PIN, GREEN_PIN, LEFT_GREEN_PIN, RIGHT_GREEN_PIN, RECV_PIN, SWITCH_CONTROL_BUTTON_PIN);
 }
 
 void loop()
 {
-  controller.loop();
+  controller->loop();
 }

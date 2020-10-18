@@ -1,14 +1,16 @@
 #include "traffic-lights.h"
 
 #include <Arduino.h>
+#include "controller/controller.h"
+#include "light.h"
 
-TrafficLights::TrafficLights(const int &redPin, const int &yellowPin, const int &greenPin, const int &leftPin, const int &rightPin)
+TrafficLights::TrafficLights(const int &redPin, const int &yellowPin, const int &greenPin, const int &leftPin, const int &rightPin, Controller *controller)
 {
-    this->_redLight = new Light(redPin);
-    this->_yellowLight = new Light(yellowPin);
-    this->_greenLight = new Light(greenPin);
-    this->_leftGreenLight = new Light(leftPin);
-    this->_rightGreenLight = new Light(rightPin);
+    this->_redLight = new Light(Type::TRED, redPin, controller);
+    this->_yellowLight = new Light(Type::TYELLOW, yellowPin, controller);
+    this->_greenLight = new Light(Type::TGREEN, greenPin, controller);
+    this->_leftGreenLight = new Light(Type::LEFT_GREEN, leftPin, controller);
+    this->_rightGreenLight = new Light(Type::RIGHT_GREEN, rightPin, controller);
 }
 
 TrafficLights::~TrafficLights()

@@ -1,11 +1,12 @@
 #pragma once
 
-#include "light.h"
+class Light;
+class Controller;
 
 class TrafficLights
 {
 public:
-    TrafficLights(const int &redPin, const int &yellowPin, const int &greenPin, const int &leftPin, const int &rightPin);
+    TrafficLights(const int &redPin, const int &yellowPin, const int &greenPin, const int &leftPin, const int &rightPin, Controller *controller);
     ~TrafficLights();
 
     void loop();

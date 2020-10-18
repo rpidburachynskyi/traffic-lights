@@ -55,11 +55,15 @@ void Socket::loop()
     }
 }
 
-void Socket::writeState(const bool &redState)
+void Socket::writeState(const bool &redState, const bool &yellowState, const bool &greenState, const bool &leftGreenState, const bool &rightGreenState)
 {
     JSONObject root;
 
     root[L"red"] = new JSONValue(redState);
+    root[L"yellow"] = new JSONValue(yellowState);
+    root[L"green"] = new JSONValue(greenState);
+    root[L"leftGreen"] = new JSONValue(leftGreenState);
+    root[L"rightGreen"] = new JSONValue(rightGreenState);
 
     JSONValue *rootValue = new JSONValue(root);
 

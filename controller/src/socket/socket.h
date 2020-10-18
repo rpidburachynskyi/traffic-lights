@@ -40,7 +40,7 @@ public:
 
     Info info();
 
-    void writeState(const bool &redState);
+    void writeState(const bool &redState, const bool &yellowState, const bool &greenState, const bool &leftGreenState, const bool &rightGreenState);
 
 private:
     bool _hasUpdate;

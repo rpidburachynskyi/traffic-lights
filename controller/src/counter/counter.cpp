@@ -8,6 +8,8 @@ std::string NumberToString(const int &n);
 Counter::Counter(const int &CLK, const int &DIO) : _lastMillis(0), _fromSeconds(0)
 {
     _display = new TM1637Display(CLK, DIO);
+
+    this->_display->setBrightness(0x0f);
 }
 
 Counter::~Counter()
@@ -55,9 +57,14 @@ void Counter::loop()
 
 void Counter::show(std::string s)
 {
-    uint8_t data[] = {0xff, 0xff, 0xff, 0xff};
+    static std::string lastShow = "";
 
-    this->_display->setBrightness(0x0f);
+    if (lastShow == s)
+        return;
+
+    lastShow = s;
+
+    uint8_t data[] = {0xff, 0xff, 0xff, 0xff};
 
     for (int i = 0; i < 4; i++)
     {
