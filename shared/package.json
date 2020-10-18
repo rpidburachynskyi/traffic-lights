@@ -1,0 +1,20 @@
+{
+  "name": "shared",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "start:dev": "nodemon -e ts --watch \"src\" --exec \"npm run build\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^4.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.5"
+  }
+}
