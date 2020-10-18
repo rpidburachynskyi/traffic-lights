@@ -33,17 +33,21 @@ const LightListItem = ({ lights, light, canClamp }: Props) => {
 
 	return (
 		<List.Item className={classes.item}>
-			<Typography.Title level={5}>Light</Typography.Title>
-			<TimePicker
-				showHour={false}
-				showNow={false}
-				format='mm:ss'
-				value={moment(
-					`${Math.floor(light.duration / 60)}:${light.duration % 60}`,
-					'mm:ss'
-				)}
-				onChange={onChangeTime}
-			/>
+			<Typography.Title level={5}>{light.name}</Typography.Title>
+			{!light.spec && (
+				<TimePicker
+					showHour={false}
+					showNow={false}
+					format='mm:ss'
+					value={moment(
+						`${Math.floor(light.duration / 60)}:${
+							light.duration % 60
+						}`,
+						'mm:ss'
+					)}
+					onChange={onChangeTime}
+				/>
+			)}
 			{light.spec && (
 				<Select
 					value={light.linksWithId}
