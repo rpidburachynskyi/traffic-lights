@@ -45,3 +45,8 @@ export const updateController = () => {
 	if (!_socket) return;
 	_socket.write(JSON.stringify({ type: 'update', ...getInfo() }));
 };
+
+export const restartController = () => {
+	if (!_socket) return;
+	_socket.write('RESTART');
+};

@@ -1,9 +1,11 @@
 import { handlers } from 'shared';
 import { updateInfo } from '../info';
+import { restartController } from '../socket/socket';
 import { updateAll } from '../utils';
 
 export const connectActions = (socket: SocketIO.Socket) => {
 	socket.on('turn', onTurn);
+	socket.on('restart', onRestart);
 	socket.on('setTime', onSetTime);
 	socket.on('clamp', onClamp);
 	socket.on('unclamp', onUnlamp);
@@ -16,6 +18,10 @@ const onTurn = (isTurned: boolean) => {
 		isTurned
 	}));
 	updateAll();
+};
+
+const onRestart = () => {
+	restartController();
 };
 
 const onSetTime = (lightId: string, time: number) => {
