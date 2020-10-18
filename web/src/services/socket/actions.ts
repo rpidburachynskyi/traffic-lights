@@ -11,6 +11,10 @@ export const turn = (value: boolean) => {
 	_socket.emit('turn', value);
 };
 
+export const restart = () => {
+	_socket.emit('restart');
+};
+
 export const setTime = (lightId: string, time: number) => {
 	_socket.emit('setTime', lightId, time);
 	setGlobalInfo((info) => handlers.setTimeHandler(info, lightId, time));

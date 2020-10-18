@@ -1,5 +1,6 @@
-import { Layout, Switch } from 'antd';
+import { Button, Layout, Switch } from 'antd';
 import React from 'react';
+import { restart } from '../../services/socket/actions';
 
 import classes from './Header.module.scss';
 
@@ -18,6 +19,9 @@ const Header = ({ isTurned, onTurn }: Props) => {
 					checked={isTurned}
 					onChange={onTurn}
 				/>
+				<Button type='primary' size='small' onClick={restart}>
+					Restart
+				</Button>
 			</div>
 		</Layout.Header>
 	);
