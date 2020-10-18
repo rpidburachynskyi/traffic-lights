@@ -11,4 +11,8 @@ public:
 
 private:
     int _pin;
+    bool _isTurned;
+
+    bool _isBlinking;
+    int _lastMillis;
 };
