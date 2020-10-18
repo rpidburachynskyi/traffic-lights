@@ -1,5 +1,7 @@
 import * as net from 'net';
+import { types } from 'shared';
 import { getInfo } from '../info';
+import { updateState } from '../state';
 
 const server = net.createServer();
 
@@ -11,6 +13,24 @@ server.on('connection', (socket) => {
 	_socket = socket;
 
 	_socket.write(JSON.stringify({ type: 'init', ...getInfo() }));
+
+	socket.on('data', (data) => {
+		const obj = JSON.parse(data.toString());
+
+		const newState: types.State = {
+			redState: !!obj.red,
+			yellowState: !!obj.yellow,
+			greenState: !!obj.green,
+			leftGreenState: !!obj.leftGreen,
+			rightGreenState: !!obj.rightGreen
+		};
+
+		updateState(newState);
+	});
+
+	socket.on('error', (err) => {
+		console.log(err);
+	});
 });
 
 server.listen(process.env.SOCKET_PORT, () => {
@@ -20,5 +40,6 @@ server.listen(process.env.SOCKET_PORT, () => {
 });
 
 export const updateController = () => {
+	if (!_socket) return;
 	_socket.write(JSON.stringify({ type: 'update', ...getInfo() }));
 };

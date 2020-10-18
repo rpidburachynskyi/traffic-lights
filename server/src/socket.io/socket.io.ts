@@ -1,6 +1,7 @@
 import { Server } from 'http';
 import * as socketIo from 'socket.io';
 import { getInfo } from '../info';
+import { getState } from '../state';
 import { connectActions } from './connectActions';
 
 let sockets: SocketIO.Socket[] = [];
@@ -26,7 +27,8 @@ const onConnect = (socket: socketIo.Socket) => {
 export const updateSockets = () => {
 	sockets.forEach((socket) => {
 		const info = getInfo();
+		const state = getState();
 
-		socket.emit('update', { info });
+		socket.emit('update', { info, state });
 	});
 };
