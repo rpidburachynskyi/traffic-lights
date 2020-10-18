@@ -7,7 +7,7 @@ public:
 
     void loop();
 
-    void turn(const bool &isLighting);
+    void turn(const bool &isLighting, const bool &isBlinking);
 
 private:
     int _pin;

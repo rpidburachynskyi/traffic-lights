@@ -29,27 +29,27 @@ void TrafficLights::loop()
     this->_rightGreenLight->loop();
 }
 
-void TrafficLights::turnRed(const bool &isLighting)
+void TrafficLights::turnRed(const bool &isLighting, const bool &isBlinking)
 {
-    this->_redLight->turn(isLighting);
+    this->_redLight->turn(isLighting, isBlinking);
 }
 
-void TrafficLights::turnYellow(const bool &isLighting)
+void TrafficLights::turnYellow(const bool &isLighting, const bool &isBlinking)
 {
-    this->_yellowLight->turn(isLighting);
+    this->_yellowLight->turn(isLighting, isBlinking);
 }
 
-void TrafficLights::turnGreen(const bool &isLighting)
+void TrafficLights::turnGreen(const bool &isLighting, const bool &isBlinking)
 {
-    this->_greenLight->turn(isLighting);
+    this->_greenLight->turn(isLighting, isBlinking);
 }
 
-void TrafficLights::turnLeftGreen(const bool &isLighting)
+void TrafficLights::turnLeftGreen(const bool &isLighting, const bool &isBlinking)
 {
-    this->_leftGreenLight->turn(isLighting);
+    this->_leftGreenLight->turn(isLighting, isBlinking);
 }
 
-void TrafficLights::turnRightGreen(const bool &isLighting)
+void TrafficLights::turnRightGreen(const bool &isLighting, const bool &isBlinking)
 {
-    this->_rightGreenLight->turn(isLighting);
+    this->_rightGreenLight->turn(isLighting, isBlinking);
 }

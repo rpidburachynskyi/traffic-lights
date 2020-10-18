@@ -10,11 +10,11 @@ public:
 
     void loop();
 
-    void turnRed(const bool &isLighting);
-    void turnYellow(const bool &isLighting);
-    void turnGreen(const bool &isLighting);
-    void turnLeftGreen(const bool &isLighting);
-    void turnRightGreen(const bool &isLighting);
+    void turnRed(const bool &isLighting, const bool &isBlinking = false);
+    void turnYellow(const bool &isLighting, const bool &isBlinking = false);
+    void turnGreen(const bool &isLighting, const bool &isBlinking = false);
+    void turnLeftGreen(const bool &isLighting, const bool &isBlinking = false);
+    void turnRightGreen(const bool &isLighting, const bool &isBlinking = false);
 
 private:
     Light *_redLight;

@@ -23,12 +23,13 @@ void Light::loop()
     if (sub >= 500)
     {
         _lastMillis = millis();
-        turn(!_isTurned);
+        turn(!_isTurned, _isBlinking);
     }
 }
 
-void Light::turn(const bool &isLighting)
+void Light::turn(const bool &isLighting, const bool &isBlinking)
 {
     digitalWrite(this->_pin, isLighting ? HIGH : LOW);
     this->_isTurned = isLighting;
+    this->_isBlinking = isBlinking;
 }
