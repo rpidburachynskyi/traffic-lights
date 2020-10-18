@@ -31,6 +31,8 @@ public:
 
     void loop();
 
+    void restart();
+
     void setState(const bool &red, const bool &yellow, const bool &green, const bool &leftGreen, const bool &rightGreen);
     void setRedState(const bool &red);
     void setYellowState(const bool &yellow);

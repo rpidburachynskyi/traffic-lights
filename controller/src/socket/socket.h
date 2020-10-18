@@ -3,6 +3,8 @@
 #include <WiFi.h>
 #include <vector>
 
+class Controller;
+
 class LightInfo
 {
 public:
@@ -29,7 +31,7 @@ public:
 class Socket
 {
 public:
-    Socket();
+    Socket(Controller *controller);
     ~Socket();
 
     void begin(const IPAddress &ip, const int &port);
@@ -47,4 +49,6 @@ private:
     Info _info;
 
     WiFiClient *_client;
+
+    Controller *_controller;
 };

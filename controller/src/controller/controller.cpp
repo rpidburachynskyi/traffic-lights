@@ -24,15 +24,10 @@ Controller::Controller(
                              _leftGreenState(false),
                              _rightGreenState(false)
 {
-
-    ;
-    ;
-    ;
-
     this->_counter = new Counter(clk, dio);
     this->_trafficLights = new TrafficLights(redPin, yellowPin, greenPin, leftGreenPin, rightGreenPin, this);
 
-    this->_socket = new Socket;
+    this->_socket = new Socket(this);
     this->_socket->begin(IPAddress(192, 168, 0, 104), 9000);
 
     this->_irrecv = new IRrecv(recv_pin);
@@ -50,6 +45,8 @@ Controller::~Controller()
 {
     delete this->_counter;
     delete this->_trafficLights;
+    delete this->_socket;
+    delete this->_irrecv;
 }
 
 void Controller::loop()
@@ -147,6 +144,18 @@ void Controller::loop()
         this->_isStateUpdated = false;
         this->_socket->writeState(this->_redState, this->_yellowState, this->_greenState, this->_leftGreenState, this->_rightGreenState);
     }
+}
+
+void Controller::restart()
+{
+    this->_currentLightType = GREEN;
+    this->_redState = false;
+    this->_yellowState = false;
+    this->_greenState = false;
+    this->_leftGreenState = false;
+    this->_rightGreenState = false;
+
+    next();
 }
 
 void Controller::next()

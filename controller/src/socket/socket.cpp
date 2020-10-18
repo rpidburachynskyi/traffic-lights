@@ -1,9 +1,11 @@
 #include "socket.h"
 #include "../lib/JSON/JSON.h"
+#include "controller/controller.h"
 
-Socket::Socket() : _hasUpdate(false)
+Socket::Socket(Controller *controller) : _hasUpdate(false)
 {
     this->_client = new WiFiClient();
+    this->_controller = controller;
 }
 
 Socket::~Socket()
@@ -22,6 +24,12 @@ void Socket::loop()
     {
         std::string data = this->_client->readString().c_str();
         Serial.println(data.c_str());
+
+        if (data == "RESTART")
+        {
+            this->_controller->restart();
+            return;
+        }
 
         JSONValue *value = JSON::Parse(data.c_str());
         JSONObject root = value->AsObject();
