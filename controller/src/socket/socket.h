@@ -1,11 +1,29 @@
 #pragma once
 #include <string>
 #include <WiFi.h>
+#include <vector>
+
+class LightInfo
+{
+public:
+    std::wstring id;
+    bool spec;
+    std::wstring linkWithId; // only if spec == true
+    bool clamped;
+    int duration;
+};
 
 class Info
 {
 public:
     bool isTurned;
+    bool isLocalControlling;
+
+    LightInfo redLightInfo;
+    LightInfo yellowLightInfo;
+    LightInfo greenLightInfo;
+    LightInfo leftGreenLightInfo;
+    LightInfo rightGreenLightInfo;
 };
 
 class Socket
@@ -22,7 +40,10 @@ public:
 
     Info info();
 
+    void writeState(const bool &redState);
+
 private:
+    bool _hasUpdate;
     Info _info;
 
     WiFiClient *_client;
