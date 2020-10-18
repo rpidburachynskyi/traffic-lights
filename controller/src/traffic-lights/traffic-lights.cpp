@@ -4,40 +4,52 @@
 
 TrafficLights::TrafficLights(const int &redPin, const int &yellowPin, const int &greenPin, const int &leftPin, const int &rightPin)
 {
-    this->_redPin = redPin;
-    this->_yellowPin = yellowPin;
-    this->_greenPin = greenPin;
-    this->_leftPin = leftPin;
-    this->_rightPin = rightPin;
+    this->_redLight = new Light(redPin);
+    this->_yellowLight = new Light(yellowPin);
+    this->_greenLight = new Light(greenPin);
+    this->_leftGreenLight = new Light(leftPin);
+    this->_rightGreenLight = new Light(rightPin);
+}
 
-    pinMode(this->_redPin, OUTPUT);
-    pinMode(this->_yellowPin, OUTPUT);
-    pinMode(this->_greenPin, OUTPUT);
-    pinMode(this->_leftPin, OUTPUT);
-    pinMode(this->_rightPin, OUTPUT);
+TrafficLights::~TrafficLights()
+{
+    delete this->_redLight;
+    delete this->_yellowLight;
+    delete this->_greenLight;
+    delete this->_leftGreenLight;
+    delete this->_rightGreenLight;
+}
+
+void TrafficLights::loop()
+{
+    this->_redLight->loop();
+    this->_yellowLight->loop();
+    this->_greenLight->loop();
+    this->_leftGreenLight->loop();
+    this->_rightGreenLight->loop();
 }
 
 void TrafficLights::turnRed(const bool &isLighting)
 {
-    digitalWrite(this->_redPin, isLighting ? HIGH : LOW);
+    this->_redLight->turn(isLighting);
 }
 
 void TrafficLights::turnYellow(const bool &isLighting)
 {
-    digitalWrite(this->_yellowPin, isLighting ? HIGH : LOW);
+    this->_yellowLight->turn(isLighting);
 }
 
 void TrafficLights::turnGreen(const bool &isLighting)
 {
-    digitalWrite(this->_greenPin, isLighting ? HIGH : LOW);
+    this->_greenLight->turn(isLighting);
 }
 
 void TrafficLights::turnLeftGreen(const bool &isLighting)
 {
-    digitalWrite(this->_leftPin, isLighting ? HIGH : LOW);
+    this->_leftGreenLight->turn(isLighting);
 }
 
 void TrafficLights::turnRightGreen(const bool &isLighting)
 {
-    digitalWrite(this->_rightPin, isLighting ? HIGH : LOW);
+    this->_rightGreenLight->turn(isLighting);
 }

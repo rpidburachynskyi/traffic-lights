@@ -1,9 +1,12 @@
 #pragma once
 
+#include "light.h"
+
 class TrafficLights
 {
 public:
     TrafficLights(const int &redPin, const int &yellowPin, const int &greenPin, const int &leftPin, const int &rightPin);
+    ~TrafficLights();
 
     void loop();
 
@@ -14,9 +17,9 @@ public:
     void turnRightGreen(const bool &isLighting);
 
 private:
-    int _redPin;
-    int _yellowPin;
-    int _greenPin;
-    int _leftPin;
-    int _rightPin;
+    Light *_redLight;
+    Light *_yellowLight;
+    Light *_greenLight;
+    Light *_leftGreenLight;
+    Light *_rightGreenLight;
 };
