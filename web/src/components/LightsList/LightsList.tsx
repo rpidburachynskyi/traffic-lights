@@ -17,6 +17,7 @@ const LightsList = ({ lights }: Props) => {
 				<LightListItem
 					key={light.id}
 					light={light}
+					lights={lights}
 					canClamp={!isAnyoneClamped}
 				/>
 			)}

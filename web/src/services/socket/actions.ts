@@ -25,3 +25,10 @@ export const unclamp = (lightId: string) => {
 	_socket.emit('unclamp', lightId);
 	setGlobalInfo((info) => handlers.unclampHandler(info, lightId));
 };
+
+export const changeLinkWithId = (lightId: string, linkWithId: string) => {
+	_socket.emit('changeLinkWithId', lightId, linkWithId);
+	setGlobalInfo((info) =>
+		handlers.changeSpecLightLink(info, lightId, linkWithId)
+	);
+};

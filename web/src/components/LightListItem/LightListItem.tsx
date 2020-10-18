@@ -1,16 +1,30 @@
-import { Button, Form, InputNumber, List, TimePicker, Typography } from 'antd';
+import {
+	Button,
+	Form,
+	InputNumber,
+	List,
+	Select,
+	TimePicker,
+	Typography
+} from 'antd';
 import React from 'react';
 import { interfaces } from 'shared';
 import classes from './LightListItem.module.scss';
 import moment from 'moment';
-import { clamp, setTime, unclamp } from '../../services/socket/actions';
+import {
+	changeLinkWithId,
+	clamp,
+	setTime,
+	unclamp
+} from '../../services/socket/actions';
 
 interface Props {
+	lights: interfaces.ILight[];
 	light: interfaces.ILight;
 	canClamp: boolean;
 }
 
-const LightListItem = ({ light, canClamp }: Props) => {
+const LightListItem = ({ lights, light, canClamp }: Props) => {
 	const onChangeTime = (momentDate: moment.Moment | null) => {
 		if (!momentDate) throw new Error('Unknown date');
 		const time = momentDate.minutes() * 60 + momentDate.seconds();
@@ -30,6 +44,17 @@ const LightListItem = ({ light, canClamp }: Props) => {
 				)}
 				onChange={onChangeTime}
 			/>
+			{light.spec && (
+				<Select
+					value={light.linksWithId}
+					style={{ width: 120 }}
+					onChange={(linkId) => changeLinkWithId(light.id, linkId)}
+				>
+					{lights.map((l) => (
+						<Select.Option value={l.id}>{l.name}</Select.Option>
+					))}
+				</Select>
+			)}
 			{light.clamped && (
 				<Button type='primary' onClick={() => unclamp(light.id)}>
 					Unclamp
