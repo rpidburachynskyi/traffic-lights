@@ -14,11 +14,13 @@ export const connect = (httpServer: Server) => {
 
 const onConnect = (socket: socketIo.Socket) => {
 	const info = getInfo();
+	const state = getState();
 
 	sockets.push(socket);
 
 	socket.emit('init', {
-		info
+		info,
+		state
 	});
 
 	connectActions(socket);

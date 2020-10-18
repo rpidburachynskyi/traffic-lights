@@ -15,6 +15,5 @@ export const getState = () => {
 
 export const updateState = (state: types.State) => {
 	_state = state;
-	console.log;
 	updateSockets();
 };

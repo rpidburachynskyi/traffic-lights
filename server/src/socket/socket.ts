@@ -15,7 +15,9 @@ server.on('connection', (socket) => {
 	_socket.write(JSON.stringify({ type: 'init', ...getInfo() }));
 
 	socket.on('data', (data) => {
-		const obj = JSON.parse(data.toString());
+		const obj = JSON.parse(
+			data.toString().slice(data.toString().lastIndexOf('}{') + 1)
+		);
 
 		const newState: types.State = {
 			redState: !!obj.red,
