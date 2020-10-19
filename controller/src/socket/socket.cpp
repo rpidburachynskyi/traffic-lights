@@ -2,6 +2,8 @@
 #include "../lib/JSON/JSON.h"
 #include "controller/controller.h"
 
+LightInfo::LightInfo() : duration(10) {}
+
 Socket::Socket(Controller *controller) : _hasUpdate(false)
 {
     this->_client = new WiFiClient();
@@ -15,11 +17,18 @@ Socket::~Socket()
 
 void Socket::begin(const IPAddress &ip, const int &port)
 {
+    this->_ip = ip;
+    this->_port = port;
     this->_client->connect(ip, port);
 }
 
 void Socket::loop()
 {
+    if (!this->_client->connected())
+    {
+        this->_client->connect(this->_ip, this->_port);
+        return;
+    }
     if (this->_client->available())
     {
         std::string data = this->_client->readString().c_str();

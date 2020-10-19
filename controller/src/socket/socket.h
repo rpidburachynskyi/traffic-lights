@@ -8,6 +8,8 @@ class Controller;
 class LightInfo
 {
 public:
+    LightInfo();
+    
     std::wstring id;
     bool spec;
     std::wstring linkWithId; // only if spec == true
@@ -47,6 +49,9 @@ public:
 private:
     bool _hasUpdate;
     Info _info;
+
+    IPAddress _ip;
+    int _port;
 
     WiFiClient *_client;
 
